@@ -10,7 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_02_195603) do
+ActiveRecord::Schema.define(version: 2020_12_02_213648) do
+
+  create_table "colleges", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "exam_windows", force: :cascade do |t|
+    t.integer "exam_id", null: false
+    t.datetime "start_time", null: false
+    t.datetime "end_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exam_id"], name: "index_exam_windows_on_exam_id"
+  end
+
+  create_table "exams", force: :cascade do |t|
+    t.integer "college_id", null: false
+    t.string "name", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["college_id"], name: "index_exams_on_college_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "first_name"
@@ -21,4 +44,6 @@ ActiveRecord::Schema.define(version: 2020_12_02_195603) do
     t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
   end
 
+  add_foreign_key "exam_windows", "exams"
+  add_foreign_key "exams", "colleges"
 end
