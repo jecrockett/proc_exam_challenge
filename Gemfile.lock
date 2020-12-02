@@ -99,6 +99,7 @@ GEM
     nio4r (2.5.4)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
+    phonelib (0.6.46)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -171,6 +172,7 @@ DEPENDENCIES
   minitest-focus
   minitest-spec-rails
   mocha
+  phonelib
   pry-byebug
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
