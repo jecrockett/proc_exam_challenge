@@ -26,8 +26,13 @@ gem 'bootsnap', '>= 1.4.2', require: false
 # gem 'rack-cors'
 
 group :development, :test do
-  gem 'pry-byebug'
   gem 'factory_bot_rails'
+  gem 'pry-byebug'
+end
+
+group :test do
+  gem 'minitest-focus'
+  gem 'minitest-spec-rails'
   gem 'mocha'
 end
 
