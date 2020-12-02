@@ -10,12 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_02_213648) do
+ActiveRecord::Schema.define(version: 2020_12_02_222142) do
 
   create_table "colleges", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "exam_sessions", force: :cascade do |t|
+    t.integer "exam_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "start_time", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["exam_id"], name: "index_exam_sessions_on_exam_id"
+    t.index ["user_id"], name: "index_exam_sessions_on_user_id"
   end
 
   create_table "exam_windows", force: :cascade do |t|
@@ -44,6 +54,8 @@ ActiveRecord::Schema.define(version: 2020_12_02_213648) do
     t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
   end
 
+  add_foreign_key "exam_sessions", "exams"
+  add_foreign_key "exam_sessions", "users"
   add_foreign_key "exam_windows", "exams"
   add_foreign_key "exams", "colleges"
 end
