@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_02_222142) do
+ActiveRecord::Schema.define(version: 2020_12_03_155906) do
+
+  create_table "api_requests", force: :cascade do |t|
+    t.string "request_method"
+    t.string "endpoint"
+    t.string "payload"
+    t.string "remote_ip"
+    t.string "response_code"
+    t.string "response_body"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "colleges", force: :cascade do |t|
     t.string "name", null: false

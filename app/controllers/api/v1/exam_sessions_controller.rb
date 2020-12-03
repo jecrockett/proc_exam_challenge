@@ -1,4 +1,4 @@
-class Api::V1::ExamSessionsController < ApplicationController
+class Api::V1::ExamSessionsController < Api::ApiController
   before_action :initialize_exam_session, :set_exam_and_check_college, :set_user, only: [:create]
 
   # POST /exam_sessions
