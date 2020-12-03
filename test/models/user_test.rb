@@ -16,27 +16,32 @@ class UserTest < ActiveSupport::TestCase
         assert user.valid?
       end
 
+      # do not assume everyone has their own mobile number, allow for shared home phones
+      it 'is valid with a duplicate phone number' do
+        user.save
+        user_with_same_phone = user.dup.tap { |u| u.first_name = 'new name' }
+
+        assert user_with_same_phone.valid?
+      end
+
       it 'is invalid without a last name' do
         user.last_name = nil
 
         assert user.invalid?
       end
 
-      describe 'phone number' do
-        # NOTE: the phonelib gem determines the validity of phone numbers
+      # NOTE: the phonelib gem determines the validity of phone numbers
+      it 'is invalid without a phone number' do
+        user.phone_number = nil
 
-        it 'is invalid without a phone number' do
-          user.phone_number = nil
+        assert user.invalid?
+      end
 
-          assert user.invalid?
-        end
+      it 'cannot be a duplicate' do
+        user.save
+        dup_user = user.dup
 
-        it 'is invalid with a duplicate phone number' do
-          user.save
-          dup_user = build(:user, phone_number: user.phone_number)
-
-          assert dup_user.invalid?
-        end
+        assert dup_user.invalid?
       end
     end
   end

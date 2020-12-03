@@ -3,9 +3,10 @@ class CreateUsers < ActiveRecord::Migration[6.0]
     create_table :users do |t|
       t.string :first_name
       t.string :last_name, null: false
-      t.string :phone_number, null: false, index: { unique: true }
-
+      t.string :phone_number, null: false
       t.timestamps
     end
+
+    add_index :users, [:phone_number, :last_name, :first_name], unique: true
   end
 end

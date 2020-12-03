@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(version: 2020_12_02_222142) do
     t.string "phone_number", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["phone_number"], name: "index_users_on_phone_number", unique: true
+    t.index ["phone_number", "last_name", "first_name"], name: "index_users_on_phone_number_and_last_name_and_first_name", unique: true
   end
 
   add_foreign_key "exam_sessions", "exams"

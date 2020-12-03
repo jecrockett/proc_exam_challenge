@@ -1,8 +1,14 @@
 class User < ApplicationRecord
-  before_save :format_phone
+  has_many :exam_sessions
+  has_many :exams, through: :exam_sessions
 
   validates :last_name, presence: true
-  validates :phone_number, presence: true, uniqueness: true, phone: { possible: true }
+  validates :phone_number,
+    presence: true,
+    phone: { possible: true },
+    uniqueness: { scope: [:last_name, :first_name] }
+
+  before_save :format_phone
 
   private
 
