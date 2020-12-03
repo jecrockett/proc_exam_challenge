@@ -2,7 +2,7 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   describe 'User' do
-    let(:user) { build(:user, first_name: 'test', last_name: 'test', phone_number: '5555555555') }
+    let(:user) { build(:user, first_name: 'test', last_name: 'test', phone_number: '2223334444') }
 
     describe 'validations' do
       it 'is valid with all attributes provided' do
@@ -42,6 +42,27 @@ class UserTest < ActiveSupport::TestCase
         dup_user = user.dup
 
         assert dup_user.invalid?
+      end
+    end
+
+    describe 'phone number formatting' do
+      let(:expected_phone) { '+12223334444' }
+
+      it 'normalizes phone number to the E.164 standard' do
+        refute_equal expected_phone, user.phone_number
+
+        user.save
+
+        assert_equal expected_phone, user.phone_number
+      end
+
+      it 'can normalize formatted numbers' do
+        number_formats = ['(222)-333-4444', '222-333-4444', '(222) 333-4444']
+
+        number_formats.all? do |format|
+          user.update(phone_number: format)
+          assert_equal expected_phone, user.phone_number
+        end
       end
     end
   end

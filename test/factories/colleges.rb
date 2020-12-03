@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :college do
-    name { "Turing School of Software and Design" }
+    sequence(:name) { |n| "Turing School #{n}" }
   end
 end
