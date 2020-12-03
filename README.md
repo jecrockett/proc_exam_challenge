@@ -1,24 +1,26 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### Setup and Installation
+* Clone the repository
+* Run bundle and install dependencies
+* Run `bundle exec rails db:setup` to set up your database and seed it with a few colleges, exams, and exam windows
 
-Things you may want to cover:
+### Running the App
+* Run `bundle exec rails s` to spin up a local server
 
-* Ruby version
+### Sending Requests
+* Use Postman, or a similar tool, to send POST requests to `/exam_sessions`
+* Requests should contain:
+  * first_name: String
+  * last_name: String
+  * phone_number: String
+  * college_id: Integer
+  * exam_id: Integer
+  * start_time: DateTime
 
-* System dependencies
+### Testing
+* Run tests with `bundle exec rails test`
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Other Notes
+* No users are seeded by default. To add users, submit one or more successul requests to `/exam_sessions`
+* By default, the seeded `Music 101` and `Coding 101` exams have open exam windows, while both `Final Exam` exams do not
