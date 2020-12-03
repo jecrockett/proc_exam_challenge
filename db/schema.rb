@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_03_155906) do
+ActiveRecord::Schema.define(version: 2020_12_03_175051) do
 
   create_table "api_requests", force: :cascade do |t|
     t.string "request_method"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 2020_12_03_155906) do
     t.string "response_body"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "error_message"
   end
 
   create_table "colleges", force: :cascade do |t|
